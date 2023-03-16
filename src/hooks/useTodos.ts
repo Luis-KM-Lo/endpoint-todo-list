@@ -14,16 +14,7 @@ const getTodos = async (url: string) => {
   return await res.json();
 };
 
-interface ReturnType {
-  isTodosLoading: boolean;
-  todoData?: Todo[];
-  completedList?: Todo[];
-  incompletedList?: Todo[];
-  todosError?: any;
-  mutateTodo?: any;
-}
-
-export function useTodos(): ReturnType {
+export function useTodos() {
   const {
     data: todoData,
     isLoading: isTodosLoading,

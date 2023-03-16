@@ -13,12 +13,20 @@ import { Todo, TodoStatus } from '../../types';
 import { getItemStatus, getListItemBackgroundColor } from '../../helpers';
 
 interface Props extends Todo {
-  onClick: ({ id, isComplete }: Todo) => void;
+  onClick: (params: Todo) => void;
   selectedItem: {
     id: string;
     loading: boolean;
   };
 }
+
+const StyledListItem = styled(ListItem)<{ status: TodoStatus }>`
+  margin: 8px 0;
+  height: 50px;
+  ${({ status }) => css`
+    background-color: ${getListItemBackgroundColor(status)};
+  `}
+`;
 
 export const TodoItem = memo(function ({
   id,
@@ -28,14 +36,6 @@ export const TodoItem = memo(function ({
   selectedItem,
   onClick,
 }: Props) {
-  const StyledListItem = styled(ListItem)<{ status: TodoStatus }>`
-    margin: 8px 0;
-    height: 50px;
-    ${({ status }) => css`
-      background-color: ${getListItemBackgroundColor(status)};
-    `}
-  `;
-
   return (
     <StyledListItem
       dense

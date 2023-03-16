@@ -4,6 +4,12 @@ import { Todo } from '../../types';
 import { TodoItem } from '../TodoItem';
 import { useTodos } from '../../hooks/useTodos';
 
+const StyledListContainer = styled(Box)`
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+`;
+
 export function TodoList() {
   const {
     todoData,
@@ -18,12 +24,6 @@ export function TodoList() {
     id: string;
     loading: boolean;
   }>({ id: '', loading: false });
-
-  const StyledListContainer = styled(Box)`
-    display: flex;
-    justify-content: center;
-    margin-top: 16px;
-  `;
 
   const handleClick = useCallback(
     async ({ id, isComplete, ...rest }: Todo) => {
@@ -98,5 +98,3 @@ export function TodoList() {
     </StyledListContainer>
   );
 }
-
-export default TodoList;

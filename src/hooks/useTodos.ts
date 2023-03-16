@@ -55,12 +55,22 @@ export function useTodos(): ReturnType {
     [todoData]
   );
 
-  return {
-    isTodosLoading,
-    todoData: todoData ?? [],
-    completedList,
-    incompletedList,
-    todosError,
-    mutateTodo,
-  };
+  return useMemo(
+    () => ({
+      isTodosLoading,
+      todoData: todoData ?? [],
+      completedList,
+      incompletedList,
+      todosError,
+      mutateTodo,
+    }),
+    [
+      completedList,
+      incompletedList,
+      todoData,
+      isTodosLoading,
+      todosError,
+      mutateTodo,
+    ]
+  );
 }

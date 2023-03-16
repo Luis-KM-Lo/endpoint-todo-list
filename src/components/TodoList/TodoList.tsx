@@ -28,6 +28,7 @@ export function TodoList() {
   const handleClick = useCallback(
     async ({ id, isComplete, ...rest }: Todo) => {
       setSelectedItem({ id: id ?? '', loading: true });
+
       try {
         const res = await fetch(
           `${process.env.REACT_APP_API_URL}/patch/${id}`,
@@ -54,6 +55,7 @@ export function TodoList() {
       } catch (error) {
         console.log('Error', error);
       }
+
       setSelectedItem({ id: id ?? '', loading: false });
     },
     [todoData, mutateTodo]

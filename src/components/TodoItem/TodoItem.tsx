@@ -40,9 +40,19 @@ export const TodoItem = memo(function ({
     <StyledListItem
       dense
       status={getItemStatus({ dueDate, isComplete })}
-      onClick={() =>
-        onClick({ id, isComplete: !isComplete, description, dueDate })
-      }
+      onClick={() => {
+        if (id !== selectedItem?.id && selectedItem?.loading) {
+          return;
+        }
+        onClick({ id, isComplete: !isComplete, description, dueDate });
+      }}
+      disabled={id !== selectedItem?.id && selectedItem?.loading}
+      sx={{
+        '&.Mui-disabled': {
+          opacity: 1,
+          cursor: 'not-allowed',
+        },
+      }}
       secondaryAction={
         dueDate ? (
           <ListItemText
@@ -62,9 +72,13 @@ export const TodoItem = memo(function ({
           <Checkbox
             defaultChecked={isComplete}
             disableRipple
+            disabled={id !== selectedItem?.id && selectedItem?.loading}
             sx={{
               '&.Mui-checked': {
                 color: 'black',
+              },
+              '&.Mui-disabled': {
+                cursor: 'not-allowed',
               },
             }}
             inputProps={{ 'aria-labelledby': description }}
